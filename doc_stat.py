@@ -31,6 +31,5 @@ def calculate_documented_percentage(dirpath):
         return round(percentage, 1)
 
 
-dirpath = '/home/kamelovn/cookiecutter/cookiecutter/'
-percentage = calculate_documented_percentage(dirpath)
-print(f"The percentage of documented code in {dirpath} is {percentage}%")
+# dirpath = '/home/kamelovn/cookiecutter/cookiecutter/'
+# percentage = calculate_documented_percentage(dirpath)

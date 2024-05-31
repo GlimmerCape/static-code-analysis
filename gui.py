@@ -14,7 +14,7 @@ class CodeAnalyzerApp:
     def __init__(self, root):
         self.root = root
 
-        self.root.title("Static Code Analysis Tool")
+        self.root.title("Инструмент для статического анализа кода")
 
         # Main Frame
         # main_frame = customtkinter.CTkFrame(root, width=800, height=600, fg_color="#404252")
@@ -32,20 +32,20 @@ class CodeAnalyzerApp:
         button_frame.columnconfigure(2, weight=1, uniform="a")
         button_frame.columnconfigure(3, weight=1, uniform="a")
         self.file_path = tk.StringVar()
-        self.file_button = customtkinter.CTkButton(button_frame, text="Pick Project", font=("Verdana", 16), height=30, command=self.pick_folder, fg_color="#282a3a")
+        self.file_button = customtkinter.CTkButton(button_frame, text="Выбор проекта", font=("Verdana", 16), height=30, command=self.pick_folder, fg_color="#282a3a")
         self.file_button.grid(row=0, column=1, padx=5, pady=5)
 
-        self.analyze_button = customtkinter.CTkButton(button_frame, text="Analyze", font=("Verdana", 16), height=30, command=self.analyze_directory, fg_color="#282a3a")
+        self.analyze_button = customtkinter.CTkButton(button_frame, text="Анализ", font=("Verdana", 16), height=30, command=self.analyze_directory, fg_color="#282a3a")
         self.analyze_button.grid(row=0, column=2, padx=5, pady=5)
 
-        self.about_button = customtkinter.CTkButton(button_frame, text="About", font=("Verdana", 16), height=30, command=self.show_about, fg_color="#282a3a")
+        self.about_button = customtkinter.CTkButton(button_frame, text="О программе", font=("Verdana", 16), height=30, command=self.show_about, fg_color="#282a3a")
         self.about_button.grid(row=0, column=3, padx=5, pady=5)
 
         # Analysis Summary
         summary_frame = customtkinter.CTkFrame(main_frame, fg_color="#b3b5bd")
         summary_frame.grid(row=1, column=0, padx=10, pady=10, sticky="ew")
         
-        summary_label = customtkinter.CTkLabel(summary_frame, text="Analysis Summary:", font=("Helvetica", 14, "bold"))
+        summary_label = customtkinter.CTkLabel(summary_frame, text="Результаты анализа", font=("Helvetica", 14, "bold"))
         summary_label.pack(expand=True)
         
         self.summary_text = customtkinter.CTkLabel(summary_frame, text="", bg_color="#282a3a", text_color="#f3f4f8", anchor="w", justify="left", width=760, height=100, padx=10, pady=10)
@@ -62,7 +62,7 @@ class CodeAnalyzerApp:
         charts_frame = customtkinter.CTkFrame(main_frame)
         charts_frame.grid(row=3, column=0, padx=10, pady=10, sticky="ew")
         
-        chart_placeholder = customtkinter.CTkLabel(charts_frame, text="Error History:\n[Charts Placeholder]", font=("Helvetica", 12, "italic"))
+        chart_placeholder = customtkinter.CTkLabel(charts_frame, text="История результатов анализа:\n[Charts Placeholder]", font=("Helvetica", 12, "italic"))
         chart_placeholder.grid(row=0, column=0, sticky="ew")
         
         main_frame.columnconfigure(0, weight=1)
@@ -114,17 +114,19 @@ class CodeAnalyzerApp:
 
     def pick_folder(self):
         directory_path = filedialog.askdirectory()
-        if directory_path:
+        if directory_path and os.path.exists(os.path.join(directory_path, "__init__.py")):
             self.file_path.set(directory_path)
-            self.results_text.configure(text=f"Selected project: {directory_path}\n")
+            self.results_text.configure(text=f"Выбран проект: {directory_path}\n")
+        else:
+            self.results_text.configure(text=f"Не удалось выбрать проект{directory_path}. Удостоверьтесь что в проекте есть __init__.py.\n")
 
     def analyze_directory(self):
         directory_path = self.file_path.get()
         if not directory_path:
-            messagebox.showwarning("No Directory", "Please select a directory first.")
+            messagebox.showwarning("Проект не выбран", "Укажите проект, который должен быть проанализирован.")
             return
         try:
-            self.results_text.configure(text=f"Analyzing directory: {directory_path}\n")
+            self.results_text.configure(text=f"Проводится анализ проекта: {directory_path}\n")
             new_text = ""
             for root, dirs, files in os.walk(directory_path):
                 # Skip hidden directories
@@ -134,15 +136,15 @@ class CodeAnalyzerApp:
                         file_path = os.path.join(root, file)
                         new_text = new_text + self.lint_file(file_path)
             self.results_text.configure(text=new_text)
-            sum_text = f"Percentage of documented functions and classes: {doc_stat.calculate_documented_percentage(directory_path)}%"
+            sum_text = f"Процент задокументированных классов и функций: {doc_stat.calculate_documented_percentage(directory_path)}%"
 
-            sum_text = sum_text + "\n\n Total issues:"
+            sum_text = sum_text + "\n\n Общее количество проблем:"
             sum_text = sum_text + "\n - Warnings:"
             sum_text = sum_text + "\n - Convention:"
-            sum_text = sum_text + "\n - Code smells:"
+            sum_text = sum_text + "\n - Refactor:"
             self.summary_text.configure(text=sum_text)
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to analyze directory: {str(e)}")
+            messagebox.showerror("Ошибка", f"Не удалось проанализировать проект: {str(e)}")
 
     def lint_file(self, file_path):
         try:
@@ -152,15 +154,15 @@ class CodeAnalyzerApp:
             errors = lint(content)
 
             new_text = ""
-            new_text = new_text = f"------------------------------------------------------------\nResults for {file_path}:\n"
+            new_text = new_text = f"------------------------------------------------------------\nРезультаты для {file_path}:\n"
             if errors:
                 for error in errors:
                     new_text = new_text + f"{error}\n\n"
             else:
-                new_text = new_text + "No issues found.\n\n"
+                new_text = new_text + "Проблемы не найдены.\n\n"
             return new_text
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to analyze file {file_path}: {str(e)}")
+            messagebox.showerror("Ошибка", f"Не удалось проанализировать файл: {file_path}: {str(e)}")
 
     def save_result(self):
         result_text = self.results_text.get("1.0", tk.END)
@@ -178,7 +180,7 @@ class CodeAnalyzerApp:
                 messagebox.showerror("Error", f"Failed to save results: {str(e)}")
 
     def show_about(self):
-        messagebox.showinfo("About", "About program")
+        messagebox.showinfo("О программе", "Это программа для анализа кода. Укажите проект и проанализируйте его с помощью кнопок в интерфейсе.\n Разработчик: Камелов Н.Н.")
     
 
 if __name__ == "__main__":
