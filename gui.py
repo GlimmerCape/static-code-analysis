@@ -181,7 +181,7 @@ class CodeAnalyzerApp:
 
     def show_about(self):
         messagebox.showinfo("О программе", "Это программа для анализа кода. Укажите проект и проанализируйте его с помощью кнопок в интерфейсе.\n Разработчик: Камелов Н.Н.")
-    
+
 
 if __name__ == "__main__":
     def close_window(event):
