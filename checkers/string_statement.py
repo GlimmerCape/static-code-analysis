@@ -8,5 +8,5 @@ class StringStatementChecker:
         for node in ast.walk(tree):
             if isinstance(node, ast.Expr) and isinstance(node.value, ast.Str):
                 line_content = get_line_content(tree, node.lineno)
-                errors.append(f"Строка {node.lineno}: У строчного выражения нет эффекта.\n\t{line_content}")
+                errors.append(f"EСтрока {node.lineno}: У строчного выражения нет эффекта.\n\t{line_content}")
         return errors

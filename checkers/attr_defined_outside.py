@@ -12,5 +12,5 @@ class AttributeDefinedOutsideInitChecker:
                         for stmt in method.body:
                             if isinstance(stmt, ast.Assign) and isinstance(stmt.targets[0], ast.Attribute):
                                 line_content = get_line_content(tree, stmt.lineno)
-                                errors.append(f"Строка {stmt.lineno}: Атрибут '{stmt.targets[0].attr}' определен за пределами __init__ функций.\n\t{line_content}")
+                                errors.append(f"RСтрока {stmt.lineno}: Атрибут '{stmt.targets[0].attr}' определен за пределами __init__ функций.\n\t{line_content}")
         return errors

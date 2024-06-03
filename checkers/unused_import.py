@@ -16,5 +16,5 @@ class UnusedImportChecker:
 
         unused_imports = imported_names - used_names
         for name in unused_imports:
-            errors.append(f"Найден импортированный, но неиспользованный модуль: {name}")
+            errors.append(f"RНайден импортированный, но неиспользованный модуль: {name}")
         return errors

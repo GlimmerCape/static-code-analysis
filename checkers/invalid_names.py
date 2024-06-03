@@ -11,22 +11,22 @@ class InvalidNameChecker:
     def check_class_name(self, node):
         if not CLASS_NAME_RE.match(node.name):
             line_content = get_line_content(node.lineno)
-            return f"Строка {node.lineno}: Наименование класса не соответствует PEP8 '{node.name}'. Имя должно быть в формате PascalCase.\n\t{line_content}"
+            return f"CСтрока {node.lineno}: Наименование класса не соответствует PEP8 '{node.name}'. Имя должно быть в формате PascalCase.\n\t{line_content}"
 
     def check_function_name(self, node):
         if not VAR_FUNC_NAME_RE.match(node.name):
             line_content = get_line_content(node.lineno)
-            return f"Строка {node.lineno}: Неправильное имя метода/функции '{node.name}'. Имя должно быть в формате lower_case_with_underscores.\n\t{line_content}"
+            return f"CСтрока {node.lineno}: Неправильное имя метода/функции '{node.name}'. Имя должно быть в формате lower_case_with_underscores.\n\t{line_content}"
 
     def check_variable_name(self, node):
         if not VAR_FUNC_NAME_RE.match(node.id):
             line_content = get_line_content(node.lineno)
-            return f"Строка {node.lineno}: Неправильное имя переменной '{node.id}'. Имя должно быть в формате lower_case_with_underscores.\n\t{line_content}"
+            return f"CСтрока {node.lineno}: Неправильное имя переменной '{node.id}'. Имя должно быть в формате lower_case_with_underscores.\n\t{line_content}"
 
     def check_constant_name(self, node):
         if not CONST_NAME_RE.match(node.id):
             line_content = get_line_content(node.lineno)
-            return f"Строка {node.lineno}: Неправильное имя константы '{node.id}'. Имя должно быть в формате UPPER_CASE_WITH_UNDERSCORES.\n\t{line_content}"
+            return f"CСтрока {node.lineno}: Неправильное имя константы '{node.id}'. Имя должно быть в формате UPPER_CASE_WITH_UNDERSCORES.\n\t{line_content}"
 
     def check(self, tree):
         errors = []

@@ -11,6 +11,6 @@ class UnreachableCodeChecker:
                     if isinstance(body_node, (ast.Return, ast.Raise)):
                         for unreachable in node.body[node.body.index(body_node) + 1:]:
                             line_content = get_line_content(tree, node.lineno)
-                            errors.append(f"Строка {unreachable.lineno}: Недостижимый код.\n\t{line_content}")
+                            errors.append(f"EСтрока {unreachable.lineno}: Недостижимый код.\n\t{line_content}")
                         break
         return errors

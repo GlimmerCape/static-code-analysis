@@ -8,5 +8,5 @@ class PointlessStatementChecker:
         for node in ast.walk(tree):
             if isinstance(node, ast.Expr) and not isinstance(node.value, ast.Call):
                 line_content = get_line_content(tree, node.lineno)
-                errors.append(f"Строка {node.lineno}: Это строка ничего не делает.\n\t{line_content}")
+                errors.append(f"RСтрока {node.lineno}: Это строка ничего не делает.\n\t{line_content}")
         return errors

@@ -12,5 +12,5 @@ class UnusedArgumentChecker:
                 unused_args = arg_names - used_names
                 for arg in unused_args:
                     line_content = get_line_content(tree, node.lineno)
-                    errors.append(f"Строка {node.lineno}: Неиспользованный аргумент'{arg}'.\n\t{line_content}")
+                    errors.append(f"RСтрока {node.lineno}: Неиспользованный аргумент'{arg}'.\n\t{line_content}")
         return errors

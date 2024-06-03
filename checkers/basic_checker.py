@@ -27,17 +27,17 @@ class SimpleChecker:
             UnusedImportChecker(),
             UnreachableCodeChecker(),
             DangerousDefaultValueChecker(),
-            # PointlessStatementChecker(),
-            # StringStatementChecker(),
-            # ExpressionNotAssignedChecker(),
             LineLengthAndTrailingWhitespaceChecker(),
             StatementChecker(),
             IndentationChecker(),
-            FileStructureChecker(),
             MissingDocstringChecker(),
             UnusedArgumentChecker(),
             AttributeDefinedOutsideInitChecker(),
             ConsiderUsingFStringChecker(),
+            # PointlessStatementChecker(),
+            # StringStatementChecker(),
+            # ExpressionNotAssignedChecker(),
+            # FileStructureChecker(),
         ]
         return checkers
 

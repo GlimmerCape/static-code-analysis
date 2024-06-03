@@ -14,5 +14,5 @@ class IndentationChecker:
                     expected_indent = line_indent
                 elif line_indent != expected_indent:
                     line_content = get_line_content(module, node.lineno)
-                    errors.append(f"Строка {node.lineno}: Некорректная индентация. Найдено {line_indent} пробелов, ожидалось {expected_indent}\n\t{line_content}")
+                    errors.append(f"CСтрока {node.lineno}: Некорректная индентация. Найдено {line_indent} пробелов, ожидалось {expected_indent}\n\t{line_content}")
         return errors
