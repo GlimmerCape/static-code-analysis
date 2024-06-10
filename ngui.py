@@ -199,12 +199,14 @@ with ui.card().style('background-color: #f0f0f5; padding: 20px; min-height: 100v
         with ui.card().style('background-color: #e0e0eb; padding: 20px; border-radius: 10px; flex: 1'):
             ui.label('Результаты анализа').style('font-family: Helvetica; font-size: 14px; font-weight: bold; margin-bottom: 10px')
             mapp.summary_text = ui.label('').style('background-color: #f8f8f8; white-space: pre-wrap; color: #333; padding: 10px; border-radius: 5px; width: 100%')
+            mapp.summary_text.text = "Здесь будут результаты анализа. Выберите ваш проект, чтобы начать анализ"
 
     # Detailed Results
     with ui.row().style('gap: 10px; width: 100%; margin-top: 20px'):
-        with ui.card().style('background-color: #e0e0eb; padding: 20px; border-radius: 10px; flex: 1; overflow: auto; height: 200px'):
-            ui.label('Детализированные результаты').style('font-family: Helvetica; font-size: 14px; font-weight: bold; margin-bottom: 10px')
-            mapp.results_text = ui.label('\n\n\n\n\n').style('background-color: #f8f8f8; white-space: pre-wrap; color: #333; padding: 5px; border-radius: 5px; width: 100%; height: 100%')
+        with ui.card().style('background-color: #f8f8f8: 20px; border-radius: 10px; flex: 1; overflow: auto; height: 400px'):
+            # ui.label('Детализированные результаты').style('font-family: Helvetica; font-size: 14px; font-weight: bold; margin-bottom: 10px')
+            mapp.results_text = ui.label('\n\n\n\n\n').style('white-space: pre-wrap; color: #333; padding: 5px; border-radius: 5px; width: 100%; height: 100%')
+            mapp.results_text.text = "Здесь будет детальное описание всех результатов"
 
     options = {
         'chart': {'type': 'line'},
@@ -219,7 +221,7 @@ with ui.card().style('background-color: #f0f0f5; padding: 20px; min-height: 100v
     }
     # Charts Placeholder
     with ui.row().style('background-color: #e0e0eb; width: 100%; padding: 20px; border-radius: 10px; flex: 1'):
-        ui.label('История результатов анализа').style('font-family: Helvetica; font-size: 14px; font-weight: bold; color: white; margin-bottom: 10px')
+        ui.label('История результатов анализа').style('font-family: Helvetica; font-size: 14px; font-weight: bold; color: black; margin-bottom: 10px')
     # with ui.row().style('gap: 10px; width: 100%; margin-top: 20px'):
         # ui.label('История результатов анализа').style('font-family: Helvetica; font-size: 12px; font-style: italic; color: white')
         mapp.history_chart = ui.highchart(options).style('width: 100%; height: 400px')
