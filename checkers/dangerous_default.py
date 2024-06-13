@@ -10,5 +10,5 @@ class DangerousDefaultValueChecker:
                 for arg in node.args.defaults:
                     if isinstance(arg, (ast.List, ast.Dict, ast.Set)):
                         line_content = get_line_content(tree, node.lineno)
-                        errors.append(f"EСтрока {node.lineno}: Опасное значение по умолчанию {ast.dump(arg)} использовано у аргумента.\n\t{line_content}")
+                        errors.append(f"EСтрока {node.lineno}: Опасное значение по умолчанию {ast.dump(arg)} у аргумента.\n\t{line_content}")
         return errors
